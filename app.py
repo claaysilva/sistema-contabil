@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect
-import sqlite3
+import psycopg2
 from babel.numbers import format_currency
 import os
 
@@ -8,9 +8,14 @@ app = Flask(__name__)
 
 # Conexão com o banco de dados
 def get_db_connection():
-    conn = sqlite3.connect('db_contabil.db')
-    conn.row_factory = sqlite3.Row
+    conn = psycopg2.connect(
+        host=os.environ.get('DB_HOST'),  # Host do banco de dados
+        database=os.environ.get('DB_NAME'),  # Nome do banco de dados
+        user=os.environ.get('DB_USER'),  # Nome do usuário
+        password=os.environ.get('DB_PASSWORD')  # Senha
+    )
     return conn
+
   
 @app.template_filter('currency')
 def currency_filter(value):
@@ -18,21 +23,17 @@ def currency_filter(value):
 
 # Inicializa o banco de dados (zera e cria as tabelas)
 def init_db():
-    # Remove o banco de dados se existir
-    if os.path.exists('db_contabil.db'):
-        os.remove('db_contabil.db')
-
     conn = get_db_connection()
     c = conn.cursor()
 
     # Criar as tabelas
     c.execute('''
     CREATE TABLE IF NOT EXISTS contas (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id SERIAL PRIMARY KEY,
         nome TEXT NOT NULL
     )
     ''')
-    
+
     c.execute('''
     CREATE TABLE IF NOT EXISTS lancamentos (
         id INTEGER,
@@ -49,6 +50,7 @@ def init_db():
 
     conn.commit()
     conn.close()
+
 
 # Chama a função de inicialização ao iniciar a aplicação
 init_db()
