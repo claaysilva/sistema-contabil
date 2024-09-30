@@ -76,7 +76,21 @@ Este é um sistema contábil desenvolvido para facilitar a gestão financeira de
 
 ## Estrutura do Projeto
 
-sistema-contabil/ ├── app.py # Código principal da aplicação Flask ├── templates/ # Templates HTML para renderização │ ├── index.html │ ├── add.html │ ├── balancete.html │ ├── dre.html │ ├── balanco_patrimonial.html │ └── edit.html ├── static/ # Arquivos estáticos como CSS e JavaScript │ └── css/ │ └── style.css # Arquivo de estilos CSS ├── db_contabil.db # Banco de dados SQLite (pode ser excluído se não necessário) ├── README.md # Documentação do projeto └── .gitignore # Arquivos e pastas ignorados pelo Git
+sistema-contabil/
+├── app.py # Código principal da aplicação Flask
+├── templates/ # Templates HTML para renderização
+│ ├── index.html # Página inicial do sistema
+│ ├── add.html # Página para adicionar lançamentos
+│ ├── balancete.html # Página do Balancete de Verificação
+│ ├── dre.html # Página da Demonstração do Resultado do Exercício
+│ ├── balanco_patrimonial.html # Página do Balanço Patrimonial
+│ └── edit.html # Página para editar lançamentos
+├── static/ # Arquivos estáticos como CSS e JavaScript
+│ └── css/ # Pasta de estilos CSS
+│ └── style.css # Arquivo de estilos CSS
+├── db_contabil.db # Banco de dados SQLite (pode ser excluído se não necessário)
+├── README.md # Documentação do projeto
+└── .gitignore # Arquivos e pastas ignorados pelo Git
 
 ## Melhorias Futuras
 
