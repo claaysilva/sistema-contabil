@@ -1,21 +1,28 @@
-import sqlite3
+import psycopg2
+import os
 
 # Cria o banco de dados e as tabelas
 def init_db():
-    conn = sqlite3.connect('db_contabil.db')
+    # Conexão com o banco de dados PostgreSQL
+    conn = psycopg2.connect(
+        host=os.environ.get('dpg-crtesn5ds78s7388rq90-a'),    # Host do banco de dados
+        database=os.environ.get('db_contabil'), # Nome do banco de dados
+        user=os.environ.get('claysilva'),     # Nome do usuário
+        password=os.environ.get('t3OjEwtBJAIWYDsc7U4DIdi6TyvOsyoy')  # Senha
+    )
     c = conn.cursor()
 
     # Cria as tabelas
     c.execute('''
     CREATE TABLE IF NOT EXISTS contas (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id SERIAL PRIMARY KEY,
         nome TEXT NOT NULL
     )
     ''')
-    
+
     c.execute('''
     CREATE TABLE IF NOT EXISTS lancamentos (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id SERIAL PRIMARY KEY,
         descricao TEXT NOT NULL,
         valor REAL NOT NULL,
         tipo TEXT NOT NULL,  -- 'debito' ou 'credito'
@@ -25,7 +32,15 @@ def init_db():
     ''')
 
     # Inserir as contas iniciais
-    c.execute('INSERT INTO contas (nome) VALUES ("Receita de Vendas"), ("Despesas Operacionais"), ("Despesas Financeiras"), ("Ativo Circulante"), ("Passivo Circulante")')
+    c.execute('''
+        INSERT INTO contas (nome) VALUES 
+        ('Receita de Vendas'), 
+        ('Despesas Operacionais'), 
+        ('Despesas Financeiras'), 
+        ('Ativo Circulante'), 
+        ('Passivo Circulante') 
+        ON CONFLICT (nome) DO NOTHING;
+    ''')
 
     conn.commit()
     conn.close()
