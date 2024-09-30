@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect
 import sqlite3
 from babel.numbers import format_currency
-
+import os
 
 
 app = Flask(__name__)
@@ -15,6 +15,43 @@ def get_db_connection():
 @app.template_filter('currency')
 def currency_filter(value):
     return format_currency(value, 'BRL', locale='pt_BR')
+
+# Inicializa o banco de dados (zera e cria as tabelas)
+def init_db():
+    # Remove o banco de dados se existir
+    if os.path.exists('db_contabil.db'):
+        os.remove('db_contabil.db')
+
+    conn = get_db_connection()
+    c = conn.cursor()
+
+    # Criar as tabelas
+    c.execute('''
+    CREATE TABLE IF NOT EXISTS contas (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT NOT NULL
+    )
+    ''')
+    
+    c.execute('''
+    CREATE TABLE IF NOT EXISTS lancamentos (
+        id INTEGER,
+        descricao TEXT NOT NULL,
+        valor REAL NOT NULL,
+        tipo TEXT NOT NULL,  -- 'debito' ou 'credito'
+        conta_id INTEGER,
+        FOREIGN KEY (conta_id) REFERENCES contas (id)
+    )
+    ''')
+
+    # Inserir as contas iniciais
+    c.execute('INSERT INTO contas (nome) VALUES ("Receita de Vendas"), ("Despesas Operacionais"), ("Despesas Financeiras"), ("Ativo Circulante"), ("Passivo Circulante")')
+
+    conn.commit()
+    conn.close()
+
+# Chama a função de inicialização ao iniciar a aplicação
+init_db()
 
 # Rota para a página inicial
 @app.route('/')
