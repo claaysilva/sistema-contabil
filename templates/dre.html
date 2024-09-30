@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demonstração do Resultado do Exercício</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Demonstração do Resultado do Exercício</h1>
+      <table border="1" cellpadding="10">
+        <tr>
+          <th>Categoria</th>
+          <th>Valor</th>
+        </tr>
+        <tr>
+          <td>Receitas</td>
+          <td>{{ receitas['total']|currency }}</td>
+        </tr>
+        <tr>
+          <td>Despesas</td>
+          <td>{{ despesas['total']|currency }}</td>
+        </tr>
+        <tr>
+          <th>Total</th>
+          <th>{{ resultado|currency }}</th>
+          <!-- Resultado Total -->
+        </tr>
+      </table>
+      <a href="/">Voltar para o início</a>
+    </div>
+  </body>
+</html>

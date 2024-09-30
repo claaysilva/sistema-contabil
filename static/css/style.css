@@ -1,0 +1,181 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+/* Estilos gerais */
+body {
+  background-color: #f5f5f5; /* Cinza claro */
+  color: #313131; /* Preto leve */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 20px;
+}
+
+.container {
+  background-color: #ffffff; /* Branco */
+  border: 1px solid #dcdcdc; /* Cinza claro */
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve */
+  max-width: 800px;
+  width: 100%;
+  margin: 20px 0;
+}
+
+/* Título principal */
+h1 {
+  color: #191919; /* Preto escuro */
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Links e botões */
+a,
+button {
+  display: inline-block;
+  text-decoration: none;
+  margin: 10px;
+  padding: 10px 20px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+a {
+  background-color: #4e543c; /* Cinza escuro */
+  color: #ffffff; /* Branco */
+}
+
+button {
+  background-color: #191919; /* Preto */
+  color: #ffffff; /* Branco */
+}
+
+a:hover,
+button:hover {
+  background-color: #70765d; /* Cinza mais claro */
+  color: #ffffff;
+}
+
+/* Tabelas */
+table {
+  width: 100%;
+  margin: 20px 0;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px;
+  border: 1px solid #dcdcdc;
+  text-align: center;
+}
+
+th {
+  background-color: #252525; /* Preto */
+  color: #ffffff; /* Branco */
+}
+
+td {
+  background-color: #f5f5f5; /* Cinza claro */
+}
+
+tfoot th {
+  background-color: #313131; /* Preto mais leve */
+  font-weight: bold;
+  color: #ffffff; /* Branco */
+}
+
+/* Formulários */
+form {
+  margin: 20px 0;
+}
+
+label {
+  display: block;
+  margin: 15px 0 5px;
+  text-align: left;
+  color: #252525; /* Preto */
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: #ffffff; /* Branco */
+  color: #191919; /* Preto escuro */
+}
+
+input[type="submit"],
+button {
+  background-color: #313131; /* Preto mais leve */
+  color: #ffffff; /* Branco */
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+input[type="submit"]:hover,
+button:hover {
+  background-color: #70765d; /* Cinza mais claro */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  th,
+  td {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  a,
+  button,
+  input[type="submit"] {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 18px;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  label,
+  input,
+  select,
+  button {
+    font-size: 12px;
+  }
+
+  input[type="submit"],
+  button {
+    padding: 6px 12px;
+  }
+}

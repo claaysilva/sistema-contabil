@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Balanço Patrimonial</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Balanço Patrimonial</h1>
+      <table border="1" cellpadding="10">
+        <tr>
+          <th>Ativos</th>
+          <th>Passivos</th>
+          <th>Patrimônio Líquido</th>
+        </tr>
+
+        <tr>
+          <th>R$ {{ ativos['total'] }}</th>
+          <th>R$ {{ passivos['total'] }}</th>
+          <th>R$ {{ patrimonio }}</th>
+        </tr>
+      </table>
+      <a href="/">Voltar para o início</a>
+    </div>
+  </body>
+</html>

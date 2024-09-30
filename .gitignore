@@ -1,0 +1,4 @@
+# Arquivo .gitignore
+db_contabil.db
+*.pyc
+__pycache__/

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Balancete de Verificação</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Balancete de Verificação</h1>
+      <table border="1" cellpadding="10">
+        <tr>
+          <th>Conta</th>
+          <th>Descrição</th>
+          <th>Débito</th>
+          <th>Crédito</th>
+        </tr>
+        {% for conta in contas %}
+        <tr>
+          <td>{{ conta['nome'] }}</td>
+          <td>{{ conta['descricao'] }}</td>
+          <td>{{ conta['debito']|currency }}</td>
+          <td>{{ conta['credito']|currency }}</td>
+        </tr>
+        {% endfor %}
+        <!-- Adicionar a linha de totais -->
+        <tr>
+          <th colspan="2">Total</th>
+          <th>{{ total_debitos|currency }}</th>
+          <!-- Total de Débitos -->
+          <th>{{ total_creditos|currency }}</th>
+          <!-- Total de Créditos -->
+        </tr>
+      </table>
+      <a href="/">Voltar para o início</a>
+    </div>
+  </body>
+</html>
