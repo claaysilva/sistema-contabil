@@ -8,13 +8,18 @@ app = Flask(__name__)
 
 # Conexão com o banco de dados
 def get_db_connection():
-    conn = psycopg2.connect(
-        host=os.environ.get('DB_HOST'),  # Host do banco de dados
-        database=os.environ.get('DB_NAME'),  # Nome do banco de dados
-        user=os.environ.get('DB_USER'),  # Nome do usuário
-        password=os.environ.get('DB_PASSWORD')  # Senha
-    )
-    return conn
+    try:
+        conn = psycopg2.connect(
+            host=os.environ.get('DB_HOST'),
+            database=os.environ.get('DB_NAME'),
+            user=os.environ.get('DB_USER'),
+            password=os.environ.get('DB_PASSWORD')
+        )
+        return conn
+    except psycopg2.OperationalError as e:
+        print(f"Erro ao conectar ao banco de dados: {e}")
+        return None
+
 
   
 @app.template_filter('currency')

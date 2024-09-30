@@ -5,10 +5,10 @@ import os
 def init_db():
     # Conexão com o banco de dados PostgreSQL
     conn = psycopg2.connect(
-        host=os.environ.get('dpg-crtesn5ds78s7388rq90-a'),    # Host do banco de dados
-        database=os.environ.get('db_contabil'), # Nome do banco de dados
-        user=os.environ.get('claysilva'),     # Nome do usuário
-        password=os.environ.get('t3OjEwtBJAIWYDsc7U4DIdi6TyvOsyoy')  # Senha
+        host=os.environ.get('DB_HOST'),    # Host do banco de dados
+        database=os.environ.get('DB_NAME'), # Nome do banco de dados
+        user=os.environ.get('DB_USER'),     # Nome do usuário
+        password=os.environ.get('DB_PASSWORD')  # Senha
     )
     c = conn.cursor()
 
