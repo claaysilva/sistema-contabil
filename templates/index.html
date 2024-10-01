@@ -1,21 +1,27 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Sistema Contábil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
     />
+    <title>Sistema Contábil - Página Inicial</title>
   </head>
   <body>
     <div class="container">
-      <h1>Bem-vindo ao Sistema Contábil</h1>
+      <h1>Sistema Contábil - Página Inicial</h1>
+
+      <!-- Link para adicionar um novo lançamento -->
       <a href="/add">Adicionar Lançamento</a>
       <a href="/lancamentos">Ver Lançamentos</a>
-      <a href="/balancete">Ver Balancete de Verificação</a>
-      <a href="/dre">Ver DRE</a>
-      <a href="/balanco_patrimonial">Ver Balanço Patrimonial</a>
+      <h2>Relatórios</h2>
+      <ul style="list-style: none">
+        <li><a href="/balancete">Balancete de Verificação</a></li>
+        <li><a href="/dre">Demonstração do Resultado do Exercício</a></li>
+        <li><a href="/balanco_patrimonial">Balanço Patrimonial</a></li>
+      </ul>
     </div>
   </body>
 </html>

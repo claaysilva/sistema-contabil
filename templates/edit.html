@@ -1,36 +1,38 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Lançamento</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Editar Lançamento</title>
 </head>
 <body>
-    <div class="container">
+    <div class="conteiner">
     <h1>Editar Lançamento</h1>
-    <form action="/edit/{{ lancamento.id }}" method="post">
+    <form action="{{ url_for('edit', id=lancamento.id) }}" method="POST">
         <label for="descricao">Descrição:</label>
-        <input type="text" id="descricao" name="descricao" value="{{ lancamento.descricao }}" required>
-        <br>
+        <input type="text" id="descricao" name="descricao" value="{{ lancamento.descricao }}" required><br>
+
         <label for="valor">Valor:</label>
-        <input type="number" id="valor" name="valor" step="0.01" value="{{ lancamento.valor }}" required>
-        <br>
+        <input type="number" id="valor" name="valor" step="0.01" value="{{ lancamento.valor }}" required><br>
+
         <label for="tipo">Tipo:</label>
         <select id="tipo" name="tipo" required>
             <option value="debito" {% if lancamento.tipo == 'debito' %}selected{% endif %}>Débito</option>
             <option value="credito" {% if lancamento.tipo == 'credito' %}selected{% endif %}>Crédito</option>
-        </select>
-        <br>
+        </select><br>
+
         <label for="conta_id">Conta:</label>
         <select id="conta_id" name="conta_id" required>
             {% for conta in contas %}
-                <option value="{{ conta.id }}" {% if conta.id == lancamento.conta_id %}selected{% endif %}>{{ conta.nome }}</option>
+            <option value="{{ conta.id }}" {% if lancamento.conta_id == conta.id %}selected{% endif %}>{{ conta.nome }}</option>
             {% endfor %}
-        </select>
-        <br>
-        <button type="submit">Salvar</button>
+        </select><br>
+
+        <button type="submit">Salvar Alterações</button>
     </form>
-    <a href="/">Voltar para o início</a>
-    </div>
+    <br>
+    <a href="/">Voltar para a Página Inicial</a>
+</div>
 </body>
 </html>

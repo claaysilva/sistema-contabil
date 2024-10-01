@@ -1,47 +1,63 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Lista de Lançamentos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
     />
+    <title>Lista de Lançamentos</title>
   </head>
   <body>
     <div class="container">
       <h1>Lista de Lançamentos</h1>
-      <table border="1" cellpadding="10">
-        <tr>
-          <th>ID</th>
-          <th>Descrição</th>
-          <th>Valor</th>
-          <th>Tipo</th>
-          <th>Conta</th>
-          <th>Ações</th>
-        </tr>
-        {% for lancamento in lancamentos %}
-        <tr>
-          <td>{{ lancamento['id'] }}</td>
-          <td>{{ lancamento['descricao'] }}</td>
-          <td>{{ lancamento['valor']|currency }}</td>
-          <td>{{ lancamento['tipo'] }}</td>
-          <td>{{ lancamento['conta_nome'] }}</td>
-          <td>
-            <a href="/edit/{{ lancamento['id'] }}">Editar</a>
-            <form
-              action="/delete/{{ lancamento['id'] }}"
-              method="post"
-              style="display: inline"
-              onsubmit="return confirm('Tem certeza que deseja apagar este lançamento?');"
-            >
-              <button type="submit">Apagar</button>
-            </form>
-          </td>
-        </tr>
-        {% endfor %}
+      {% if lancamentos %}
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Tipo</th>
+            <th>Conta</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for lancamento in lancamentos %}
+          <tr>
+            <td>{{ lancamento.id }}</td>
+            <td>{{ lancamento.descricao }}</td>
+            <td>{{ lancamento.valor | currency }}</td>
+            <td>{{ lancamento.tipo }}</td>
+            <td>{{ contas[lancamento.conta_id - 1]['nome'] }}</td>
+            <td>
+              <a
+                href="{{ url_for('edit', id=lancamento['id']) }}"
+                class="btn btn-edit"
+                >Editar</a
+              >
+              <form
+                action="{{ url_for('delete', id=lancamento['id']) }}"
+                method="POST"
+                style="display: inline"
+              >
+                <button type="submit" class="btn btn-delete">Deletar</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
       </table>
-      <a href="/">Voltar para o início</a>
+      {% else %}
+      <p>
+        Nenhum lançamento encontrado.
+        <a href="/add">Adicione um novo lançamento</a>
+      </p>
+      {% endif %}
+      <br />
+      <a href="/">Voltar para a Página Inicial</a>
     </div>
   </body>
 </html>

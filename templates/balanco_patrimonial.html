@@ -1,30 +1,85 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Balanço Patrimonial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
     />
+    <title>Balanço Patrimonial</title>
   </head>
   <body>
     <div class="container">
       <h1>Balanço Patrimonial</h1>
-      <table border="1" cellpadding="10">
-        <tr>
-          <th>Ativos</th>
-          <th>Passivos</th>
-          <th>Patrimônio Líquido</th>
-        </tr>
 
-        <tr>
-          <th>R$ {{ ativos['total'] }}</th>
-          <th>R$ {{ passivos['total'] }}</th>
-          <th>R$ {{ patrimonio }}</th>
-        </tr>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Categoria</th>
+            <th>Valor (R$)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Ativos -->
+          <tr>
+            <td colspan="2"><strong>Ativos</strong></td>
+          </tr>
+          <tr>
+            <td>Ativo Circulante</td>
+            <td>{{ ativo_circulante | currency }}</td>
+          </tr>
+          <tr>
+            <td>Ativo Não Circulante</td>
+            <td>{{ ativo_nao_circulante | currency }}</td>
+          </tr>
+          <tr class="total-row">
+            <td><strong>Total de Ativos</strong></td>
+            <td><strong>{{ total_ativos | currency }}</strong></td>
+          </tr>
+
+          <!-- Passivos -->
+          <tr>
+            <td colspan="2"><strong>Passivos</strong></td>
+          </tr>
+          <tr>
+            <td>Passivo Circulante</td>
+            <td>{{ passivo_circulante | currency }}</td>
+          </tr>
+          <tr>
+            <td>Passivo Não Circulante</td>
+            <td>{{ passivo_nao_circulante | currency }}</td>
+          </tr>
+          <tr>
+            <td>Patrimônio Líquido</td>
+            <td>{{ patrimonio_liquido | currency }}</td>
+          </tr>
+          <tr class="total-row">
+            <td><strong>Total de Passivos e Patrimônio Líquido</strong></td>
+            <td><strong>{{ total_passivos | currency }}</strong></td>
+          </tr>
+        </tbody>
       </table>
-      <a href="/">Voltar para o início</a>
+
+      <!-- Exibir diferença entre Ativos e Passivos (para verificar balanço) -->
+      <h2>Verificação de Balanço</h2></br>
+      {% if total_ativos == total_passivos %}
+      <p style="color: green">
+        <strong
+          >Balanço está correto: Total de Ativos e Passivos se
+          equivalem.</strong
+        >
+      </p></br>
+      {% else %}
+      <p style="color: red">
+        <strong>Atenção: Total de Ativos e Passivos não se equivalem.</strong>
+      </p>
+      {% endif %}
+
+      <!-- Link para voltar à página inicial -->
+      <div class="btn-container">
+        <a href="/" class="btn">Voltar para a Página Inicial</a>
+      </div>
     </div>
   </body>
 </html>

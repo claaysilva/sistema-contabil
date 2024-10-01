@@ -1,41 +1,67 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Balancete de Verificação</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
     />
+    <title>Balancete de Verificação</title>
   </head>
   <body>
     <div class="container">
       <h1>Balancete de Verificação</h1>
-      <table border="1" cellpadding="10">
-        <tr>
-          <th>Conta</th>
-          <th>Descrição</th>
-          <th>Débito</th>
-          <th>Crédito</th>
-        </tr>
-        {% for conta in contas %}
-        <tr>
-          <td>{{ conta['nome'] }}</td>
-          <td>{{ conta['descricao'] }}</td>
-          <td>{{ conta['debito']|currency }}</td>
-          <td>{{ conta['credito']|currency }}</td>
-        </tr>
-        {% endfor %}
-        <!-- Adicionar a linha de totais -->
-        <tr>
-          <th colspan="2">Total</th>
-          <th>{{ total_debitos|currency }}</th>
-          <!-- Total de Débitos -->
-          <th>{{ total_creditos|currency }}</th>
-          <!-- Total de Créditos -->
-        </tr>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Descrição</th>
+            <th>Débito (R$)</th>
+            <th>Crédito (R$)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for conta in contas %}
+          <tr>
+            <td>{{ conta.descricao }}</td>
+            <td>{{ conta.debito | currency }}</td>
+            <td>{{ conta.credito | currency }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
       </table>
-      <a href="/">Voltar para o início</a>
+
+      <h2>Totais</h2>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Valor (R$)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Total Débitos</strong></td>
+            <td>
+              <strong>
+                {{ contas | map(attribute='debito') | sum | currency }}
+              </strong>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Total Créditos</strong></td>
+            <td>
+              <strong>
+                {{ contas | map(attribute='credito') | sum | currency }}
+              </strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="btn-container">
+        <a href="/" class="btn">Voltar para a Página Inicial</a>
+      </div>
     </div>
   </body>
 </html>

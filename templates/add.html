@@ -1,43 +1,58 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Adicionar Lançamento</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
     />
+    <title>Adicionar Lançamento</title>
   </head>
   <body>
     <div class="container">
       <h1>Adicionar Lançamento</h1>
-      <form action="/add" method="post">
-        <label for="id">ID da Operação:</label>
-        <!-- Novo Campo para o ID -->
-        <input type="number" id="id" name="id" required />
-        <br />
+      <form method="POST">
         <label for="descricao">Descrição:</label>
         <input type="text" id="descricao" name="descricao" required />
-        <br />
+
         <label for="valor">Valor:</label>
-        <input type="number" id="valor" name="valor" step="0.01" required />
-        <br />
+        <input type="number" id="valor" name="valor" required />
+
         <label for="tipo">Tipo:</label>
         <select id="tipo" name="tipo" required>
           <option value="debito">Débito</option>
           <option value="credito">Crédito</option>
         </select>
-        <br />
-        <label for="conta_id">Conta:</label>
+
+        <label for="conta_id">Selecione a Conta:</label>
         <select id="conta_id" name="conta_id" required>
-          {% for conta in contas %}
-          <option value="{{ conta.id }}">{{ conta.nome }}</option>
-          {% endfor %}
+          <option value="">Selecione...</option>
+          <optgroup label="Ativos">
+            {% for conta in contas_ativos %}
+            <option value="{{ conta.id }}">{{ conta.nome }}</option>
+            {% endfor %}
+          </optgroup>
+          <optgroup label="Passivos">
+            {% for conta in contas_passivos %}
+            <option value="{{ conta.id }}">{{ conta.nome }}</option>
+            {% endfor %}
+          </optgroup>
+          <optgroup label="Receitas">
+            {% for conta in contas_receitas %}
+            <option value="{{ conta.id }}">{{ conta.nome }}</option>
+            {% endfor %}
+          </optgroup>
+          <optgroup label="Despesas">
+            {% for conta in contas_despesas %}
+            <option value="{{ conta.id }}">{{ conta.nome }}</option>
+            {% endfor %}
+          </optgroup>
         </select>
-        <br />
-        <button type="submit">Adicionar</button>
+
+        <button type="submit">Adicionar Lançamento</button>
       </form>
-      <a href="/">Voltar para o início</a>
+      <a href="/lancamentos">Voltar para Lista de Lançamentos</a>
     </div>
   </body>
 </html>

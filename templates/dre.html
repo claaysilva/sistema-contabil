@@ -1,36 +1,44 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demonstração do Resultado do Exercício</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
     />
+    <title>Demonstração do Resultado do Exercício</title>
   </head>
   <body>
     <div class="container">
       <h1>Demonstração do Resultado do Exercício</h1>
-      <table border="1" cellpadding="10">
-        <tr>
-          <th>Categoria</th>
-          <th>Valor</th>
-        </tr>
-        <tr>
-          <td>Receitas</td>
-          <td>{{ receitas['total']|currency }}</td>
-        </tr>
-        <tr>
-          <td>Despesas</td>
-          <td>{{ despesas['total']|currency }}</td>
-        </tr>
-        <tr>
-          <th>Total</th>
-          <th>{{ resultado|currency }}</th>
-          <!-- Resultado Total -->
-        </tr>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Descrição</th>
+            <th>Valor (R$)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Receitas Totais</td>
+            <td>{{ receitas.total | currency }}</td>
+          </tr>
+          <tr>
+            <td>Despesas Totais</td>
+            <td>{{ despesas.total | currency }}</td>
+          </tr>
+          <tr>
+            <td><strong>Resultado</strong></td>
+            <td><strong>{{ resultado | currency }}</strong></td>
+          </tr>
+        </tbody>
       </table>
-      <a href="/">Voltar para o início</a>
+
+      <div class="btn-container">
+        <a href="/" class="btn">Voltar para a Página Inicial</a>
+      </div>
     </div>
   </body>
 </html>
