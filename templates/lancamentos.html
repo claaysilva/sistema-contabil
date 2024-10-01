@@ -56,8 +56,29 @@
         <a href="/add">Adicione um novo lançamento</a>
       </p>
       {% endif %}
+      <form
+        action="{{ url_for('reset') }}"
+        method="POST"
+        id="reset-form"
+        style="display: inline"
+      >
+        <button type="submit" class="btn btn-reset">
+          Apagar Todos os Dados
+        </button>
+      </form>
       <br />
       <a href="/">Voltar para a Página Inicial</a>
     </div>
+
+    <script>
+      document
+        .getElementById("reset-form")
+        .addEventListener("submit", function (e) {
+          // Pergunta ao usuário se ele tem certeza
+          if (!confirm("Você tem certeza que deseja apagar todos os dados?")) {
+            e.preventDefault(); // Cancela o envio do formulário se o usuário não confirmar
+          }
+        });
+    </script>
   </body>
 </html>
