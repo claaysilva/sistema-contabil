@@ -12,15 +12,13 @@ Este é um sistema contábil desenvolvido para facilitar a gestão financeira de
   - Demonstração do Resultado do Exercício (DRE)
   - Balanço Patrimonial
 - **Design Responsivo**: Interface adaptável para web e dispositivos móveis.
-- **Controle de Operações**: Identifique lançamentos de uma mesma operação utilizando IDs manuais.
 
 ## Tecnologias Utilizadas
 
-- **Python 3.x**
-- **Flask**
-- **SQLite** (Banco de dados)
-- **HTML/CSS**
-- **Jinja2** (Templates do Flask)
+- **Flask**: Framework para desenvolvimento web em Python.
+- **HTML/CSS**: Estrutura e estilo da interface do usuário.
+- **JavaScript**: Interatividade na aplicação.
+- **Python**: Linguagem de programação principal do projeto.
 
 ## Como Executar o Projeto
 
