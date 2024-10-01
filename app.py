@@ -48,7 +48,6 @@ def add():
 
     return render_template('add.html', contas_ativos=contas_ativos, contas_passivos=contas_passivos, contas_receitas=contas_receitas, contas_despesas=contas_despesas)
 
-
 @app.route('/lancamentos')
 def lista_lancamentos():
     return render_template('lancamentos.html', lancamentos=lancamentos, contas=contas)
@@ -104,7 +103,6 @@ def balancete():
 
     return render_template('balancete.html', contas=balancete_list)
 
-
 @app.route('/dre')
 def dre():
     receitas_total = 0
@@ -127,8 +125,6 @@ def dre():
     resultado = receitas_total - despesas_total
 
     return render_template('dre.html', receitas={'total': receitas_total}, despesas={'total': despesas_total}, resultado=resultado)
-
-
 
 @app.route('/balanco_patrimonial')
 def balanco_patrimonial():
